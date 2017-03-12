@@ -24,6 +24,7 @@ class EndpointLoader
 
     public function load($class)
     {
+        dump($this->reader);
         $refectionClass = new \ReflectionClass($class);
         $methods = $refectionClass->getMethods();
         $baseUri = $this->getBaseUri($refectionClass);

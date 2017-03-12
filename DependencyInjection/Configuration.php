@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end()
+            ->scalarNode('annotation_reader')->end()
         ->end();
 
         return $treeBuilder;
