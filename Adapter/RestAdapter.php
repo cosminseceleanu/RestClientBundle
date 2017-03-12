@@ -28,10 +28,9 @@ class RestAdapter implements AdapterInterface
         $request  = $this->requestBuilder->setEndpoint($endpoint)
             ->setParameters($keyValueParameters)
             ->build();
-//        $response = $this->client->request($endpoint->getHttpMethod(), $path, $this->getRequestOptions($endpoint));
+        $response = $this->client->request($request->getMethod(), $request->getUri(), $request->getRequestOptions());
 
-        return 'aa';
-//        return $response;
+        return $response;
     }
 
     private function getKeyValueMethodParams($wrappedClass, $method, array $params)
@@ -47,25 +46,4 @@ class RestAdapter implements AdapterInterface
 
         return $keyValueParameters;
     }
-
-//    private function compilePath($path, $parameters)
-//    {
-//        return preg_replace_callback('|:\w+|', function ($matches) use (&$parameters) {
-//            return array_shift($parameters);
-//        }, $path);
-//    }
-//
-//    private function getRequestOptions(Endpoint $endpoint)
-//    {
-//        $options = [];
-//        if (!empty($endpoint->getQueryParams())) {
-//            $options['query'] = $endpoint->getQueryParams();
-//        }
-//
-//        if ($endpoint->getRequestBody() != null) {
-//            $options['body'] = $endpoint->getHttpMethod();
-//        }
-//
-//        return $options;
-//    }
 }
