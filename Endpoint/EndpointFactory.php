@@ -12,11 +12,12 @@ use Cos\RestClientBundle\Annotation\RequestBody;
 
 class EndpointFactory
 {
-    public function create(array $annotations)
+    public function create($baseUri, array $annotations)
     {
         foreach ($annotations as $key => $annotation) {
             if ($annotation instanceof EndpointAnnotation) {
-                $endpoint = new Endpoint($annotation->uri, $annotation->method);
+                $uri = $baseUri . $annotation->uri;
+                $endpoint = new Endpoint($uri, $annotation->method);
                 unset($annotations[$key]);
 
                 return $this->addEndpointExtraData($endpoint, $annotations);

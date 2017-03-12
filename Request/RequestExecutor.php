@@ -16,7 +16,6 @@ class RequestExecutor
 
     public function execute(Request $request)
     {
-
         $response = $this->client->request($request->getMethod(), $request->getUri(), $request->getRequestOptions());
 
         return $response;

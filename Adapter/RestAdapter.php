@@ -2,11 +2,9 @@
 
 namespace Cos\RestClientBundle\Adapter;
 
-use Cos\RestClientBundle\Endpoint\Endpoint;
 use Cos\RestClientBundle\Endpoint\EndpointCollection;
 use Cos\RestClientBundle\Request\RequestBuilder;
 use Cos\RestClientBundle\Request\RequestExecutor;
-use GuzzleHttp\ClientInterface;
 use ProxyManager\Factory\RemoteObject\AdapterInterface;
 
 class RestAdapter implements AdapterInterface

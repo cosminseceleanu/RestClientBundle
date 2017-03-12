@@ -1,7 +1,7 @@
 services:
     cos_rest_client.endpoint_loader:
         class: Cos\RestClientBundle\Endpoint\EndpointLoader
-        arguments: ["@annotation_reader", "@cos_rest_client.endpoint_collection", "@cos_rest_client.endpoint_factory"]
+        arguments: ["@annotation_reader", "@cos_rest_client.endpoint_collection", "@cos_rest_client.endpoint_factory", "%cos_rest_client.clients%"]
         public: false
 
     cos_rest_client.endpoint_collection:
@@ -18,16 +18,17 @@ services:
 
     cos_rest_client.request_executor:
         class: Cos\RestClientBundle\Request\RequestExecutor
-        arguments: ["cos_rest_client.guzzle.client"]
+        arguments: ["@cos_rest_client.guzzle.client"]
         public: false
 
     cos_rest_client.guzzle.client:
         class: GuzzleHttp\Client
-        arguments: [{'base_uri': 'http://localhost:8000'}]
+        public: false
 
     cos_rest_client.rest_adapter:
         class: Cos\RestClientBundle\Adapter\RestAdapter
         arguments: ["@cos_rest_client.request_executor", "@cos_rest_client.endpoint_collection", "@cos_rest_client.request_builder"]
+        public: false
 
     cos_rest_client.proxy_factory:
         class: Cos\RestClientBundle\Factory\RestProxyFactory
