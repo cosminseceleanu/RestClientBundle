@@ -1,0 +1,26 @@
+services:
+    cos_rest_client.endpoint_loader:
+        class: Cos\RestClientBundle\Endpoint\EndpointLoader
+        arguments: ["@annotation_reader", "@cos_rest_client.endpoint_collection", "@cos_rest_client.endpoint_factory"]
+
+    cos_rest_client.endpoint_collection:
+        class: Cos\RestClientBundle\Endpoint\EndpointCollection
+
+    cos_rest_client.endpoint_factory:
+        class: Cos\RestClientBundle\Endpoint\EndpointFactory
+
+    cos_rest_client.request_builder:
+        class: Cos\RestClientBundle\Request\RequestBuilder
+
+    cos_rest_client.guzzle.client:
+        class: GuzzleHttp\Client
+        arguments: [{'base_uri': 'http://localhost:8000'}]
+
+    cos_rest_client.rest_adapter:
+        class: Cos\RestClientBundle\Adapter\RestAdapter
+        arguments: ["@cos_rest_client.guzzle.client", "@cos_rest_client.endpoint_collection", "@cos_rest_client.request_builder"]
+
+    cos_rest_client.proxy_factory:
+        class: Cos\RestClientBundle\Factory\RestProxyFactory
+        arguments: ["@cos_rest_client.rest_adapter", "@cos_rest_client.endpoint_loader", "@cos_rest_client.request_builder"]
+
