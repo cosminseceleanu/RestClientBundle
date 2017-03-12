@@ -10,7 +10,6 @@
             "email":  "sece.cosmin@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
         "php": "^5.5 || ^7.0",
         "symfony/framework-bundle": "^2.6 || ^3.0",
