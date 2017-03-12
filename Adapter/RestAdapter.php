@@ -5,18 +5,19 @@ namespace Cos\RestClientBundle\Adapter;
 use Cos\RestClientBundle\Endpoint\Endpoint;
 use Cos\RestClientBundle\Endpoint\EndpointCollection;
 use Cos\RestClientBundle\Request\RequestBuilder;
+use Cos\RestClientBundle\Request\RequestExecutor;
 use GuzzleHttp\ClientInterface;
 use ProxyManager\Factory\RemoteObject\AdapterInterface;
 
 class RestAdapter implements AdapterInterface
 {
-    private $client;
+    private $requestExecutor;
     private $endpointCollection;
     private $requestBuilder;
 
-    public function __construct(ClientInterface $client, EndpointCollection $endpointCollection, RequestBuilder $requestBuilder)
+    public function __construct(RequestExecutor $requestExecutor, EndpointCollection $endpointCollection, RequestBuilder $requestBuilder)
     {
-        $this->client = $client;
+        $this->requestExecutor = $requestExecutor;
         $this->endpointCollection = $endpointCollection;
         $this->requestBuilder = $requestBuilder;
     }
@@ -28,9 +29,8 @@ class RestAdapter implements AdapterInterface
         $request  = $this->requestBuilder->setEndpoint($endpoint)
             ->setParameters($keyValueParameters)
             ->build();
-        $response = $this->client->request($request->getMethod(), $request->getUri(), $request->getRequestOptions());
 
-        return $response;
+        return $this->requestExecutor->execute($request);
     }
 
     private function getKeyValueMethodParams($wrappedClass, $method, array $params)
