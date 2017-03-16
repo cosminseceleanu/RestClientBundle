@@ -105,7 +105,23 @@ Call proxy methods defined in interface
         $data = ['foo' => 'bar']
         $proxy->form($data) //post request where $data is sent as application/x-www-form-urlencoded
         $proxy->json($data) // send data as json
-            
+
+Response
+-----
+Every method call from a proxy return a [Psr\Http\Message\ResponseInterface](http://docs.guzzlephp.org/en/latest/quickstart.html#using-responses)
+
+Full example
+--------
+https://github.com/cosminseceleanu/RestClientBundleSample
+
+Events
+=======
+
+**RequestEvent**: dispatched before a request is executed<br>
+**ResponseEvent**: dispatched when response is received
+
+
+
             
 
             
