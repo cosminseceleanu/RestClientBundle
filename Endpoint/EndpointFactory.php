@@ -4,6 +4,9 @@ namespace Cos\RestClientBundle\Endpoint;
 
 
 use Cos\RestClientBundle\Annotation\Endpoint as EndpointAnnotation;
+use Cos\RestClientBundle\Annotation\Form;
+use Cos\RestClientBundle\Annotation\Json;
+use Cos\RestClientBundle\Annotation\Multipart;
 use Cos\RestClientBundle\Annotation\Path;
 use Cos\RestClientBundle\Annotation\Query;
 use Cos\RestClientBundle\Annotation\QueryMap;
@@ -29,6 +32,7 @@ class EndpointFactory
 
     private function addEndpointExtraData(Endpoint $endpoint, array $annotations)
     {
+        /** @ToDo refactor this */
         foreach ($annotations as $annotation) {
             if ($annotation instanceof Path) {
                 $endpoint->addPath($annotation->name, $annotation->paramName);
@@ -41,6 +45,15 @@ class EndpointFactory
             }
             if ($annotation instanceof QueryMap) {
                 $endpoint->setQueryMap($annotation->name);
+            }
+            if ($annotation instanceof Json) {
+                $endpoint->setJson($annotation->name);
+            }
+            if ($annotation instanceof Form) {
+                $endpoint->setForm($annotation->name);
+            }
+            if ($annotation instanceof Multipart) {
+                $endpoint->setMultipart($annotation->name);
             }
         }
 

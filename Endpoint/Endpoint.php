@@ -17,6 +17,12 @@ class Endpoint
 
     private $queryMap;
 
+    private $json;
+
+    private $multipart;
+
+    private $form;
+
     public function __construct($uri, $method = 'get')
     {
         $this->uri = $uri;
@@ -71,5 +77,35 @@ class Endpoint
     public function setRequestBody($requestBody)
     {
         $this->requestBody = $requestBody;
+    }
+
+    public function setForm($form)
+    {
+        $this->form = $form;
+    }
+
+    public function getForm()
+    {
+        return $this->form;
+    }
+
+    public function getJson()
+    {
+        return $this->json;
+    }
+
+    public function setJson($json)
+    {
+        $this->json = $json;
+    }
+
+    public function getMultipart()
+    {
+        return $this->multipart;
+    }
+
+    public function setMultipart($multipart)
+    {
+        $this->multipart = $multipart;
     }
 }
