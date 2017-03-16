@@ -9,15 +9,11 @@ Installation
 
 To install CosRestClientBundle with Composer execute the following command:
 
-.. code-block :: bash
-
     $ composer require "cos/rest-client-bundle": "dev-master"
     
 Now, Composer will automatically download all required files, and install them
 for you. All that is left to do is to update your ``AppKernel.php`` file, and
 register the new bundle:
-
-.. code-block :: php
 
     <?php
 
@@ -32,8 +28,6 @@ The bundle is now installed. Lets start configure with the bundle.
 
 Configuration reference
 =========
-
-.. code-block :: yml
 
     # config.yml
     cos_rest_client:
@@ -50,8 +44,6 @@ Usage
 
 Define a rest resource interface
 -------
-
-..code-block :: php
     <?php
     
     namespace AppBundle\Rest;
@@ -98,7 +90,6 @@ Define a rest resource interface
 Create proxy for Posts
 ------
 
-    ..code-block :: php
     <?php
         //in controller
         $proxyFactory = $this->get('cos_rest_client.proxy_factory');
@@ -107,13 +98,13 @@ Create proxy for Posts
 
 Call proxy methods defined in interface
 -----
-    ..code-block :: php
-        <?php
-            $proxy->get(1); //request for client base uri + /posts/1
-            $proxy->getWithQuery(1)->getBody()->getContents(); //request for /posts?userId=1
-            $data = ['foo' => 'bar']
-            $proxy->form($data) //post request where $data is sent as application/x-www-form-urlencoded
-            $proxy->json($data) // send data as json
+
+    <?php
+        $proxy->get(1); //request for client base uri + /posts/1
+        $proxy->getWithQuery(1)->getBody()->getContents(); //request for /posts?userId=1
+        $data = ['foo' => 'bar']
+        $proxy->form($data) //post request where $data is sent as application/x-www-form-urlencoded
+        $proxy->json($data) // send data as json
             
             
 
