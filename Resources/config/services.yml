@@ -21,6 +21,11 @@ services:
         arguments: ["@cos_rest_client.guzzle.client"]
         public: false
 
+    cos_rest_client.request_executor.traceable:
+        class: Cos\RestClientBundle\Request\TraceableRequestExecutor
+        arguments: ["@cos_rest_client.request_executor", "@event_dispatcher"]
+        public: false
+
     cos_rest_client.guzzle.client:
         class: GuzzleHttp\Client
         public: false
@@ -31,10 +36,10 @@ services:
 
     cos_rest_client.rest_adapter:
         class: Cos\RestClientBundle\Adapter\RestAdapter
-        arguments: ["@cos_rest_client.request_executor", "@cos_rest_client.endpoint_collection", "@cos_rest_client.request_builder"]
+        arguments: ["@cos_rest_client.request_executor.traceable", "@cos_rest_client.endpoint_collection", "@cos_rest_client.request_builder"]
         public: false
 
     cos_rest_client.proxy_factory:
         class: Cos\RestClientBundle\Factory\RestProxyFactory
-        arguments: ["@cos_rest_client.rest_adapter", "@cos_rest_client.endpoint_loader", "@cos_rest_client.request_builder"]
+        arguments: ["@cos_rest_client.rest_adapter", "@cos_rest_client.endpoint_loader"]
 

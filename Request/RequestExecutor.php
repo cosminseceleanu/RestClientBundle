@@ -5,7 +5,7 @@ namespace Cos\RestClientBundle\Request;
 
 use GuzzleHttp\ClientInterface;
 
-class RequestExecutor
+class RequestExecutor implements RequestExecutorInterface
 {
     private $client;
 

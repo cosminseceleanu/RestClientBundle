@@ -4,7 +4,7 @@ namespace Cos\RestClientBundle\Adapter;
 
 use Cos\RestClientBundle\Endpoint\EndpointCollection;
 use Cos\RestClientBundle\Request\RequestBuilder;
-use Cos\RestClientBundle\Request\RequestExecutor;
+use Cos\RestClientBundle\Request\RequestExecutorInterface;
 use ProxyManager\Factory\RemoteObject\AdapterInterface;
 
 class RestAdapter implements AdapterInterface
@@ -13,7 +13,7 @@ class RestAdapter implements AdapterInterface
     private $endpointCollection;
     private $requestBuilder;
 
-    public function __construct(RequestExecutor $requestExecutor, EndpointCollection $endpointCollection, RequestBuilder $requestBuilder)
+    public function __construct(RequestExecutorInterface $requestExecutor, EndpointCollection $endpointCollection, RequestBuilder $requestBuilder)
     {
         $this->requestExecutor = $requestExecutor;
         $this->endpointCollection = $endpointCollection;
