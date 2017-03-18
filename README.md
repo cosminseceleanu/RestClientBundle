@@ -2,7 +2,6 @@
 
 Symfony **Rest Client Bundle** using [GuzzleHttp](http://docs.guzzlephp.org/en/latest/index.html) and [Ocramius/ProxyManager](http://ocramius.github.io/ProxyManager/)
 
-**Work in progress!!!**
 
 Installation
 ============

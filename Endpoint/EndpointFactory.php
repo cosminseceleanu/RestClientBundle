@@ -3,6 +3,7 @@
 namespace Cos\RestClientBundle\Endpoint;
 
 use Cos\RestClientBundle\Annotation\Endpoint as EndpointAnnotation;
+use Cos\RestClientBundle\Exception\InvalidConfigurationException;
 
 class EndpointFactory
 {
@@ -17,6 +18,6 @@ class EndpointFactory
             }
         }
 
-        throw new \InvalidArgumentException("Could not create endpoint! No Endpoint annotation used!");
+        throw new InvalidConfigurationException("Could not create endpoint! No Endpoint annotation used!");
     }
 }

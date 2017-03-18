@@ -5,6 +5,7 @@ namespace Cos\RestClientBundle\Endpoint;
 
 use Cos\RestClientBundle\Annotation\Client;
 use Cos\RestClientBundle\Exception\InvalidConfigurationException;
+use Cos\RestClientBundle\Exception\ParameterNotSetException;
 use Doctrine\Common\Annotations\Reader;
 
 class EndpointLoader
@@ -56,7 +57,7 @@ class EndpointLoader
     private function getClientBaseUri($clientName)
     {
         if (!isset($this->clients[$clientName])) {
-            throw new InvalidConfigurationException("No client with name {$clientName} was configured");
+            throw new ParameterNotSetException("No client with name {$clientName} was configured");
         }
 
         return $this->clients[$clientName]['baseUri'];

@@ -3,6 +3,8 @@
 namespace Cos\RestClientBundle\Endpoint;
 
 
+use Cos\RestClientBundle\Exception\InvalidConfigurationException;
+
 class EndpointCollection
 {
     /**
@@ -21,7 +23,7 @@ class EndpointCollection
     public function get($class, $method)
     {
         if (!isset($this->endpoints[$class][$method])) {
-            throw new \InvalidArgumentException(sprintf("No endpoint was configured for class %s", $class));
+            throw new InvalidConfigurationException(sprintf("No endpoint was configured for class %s", $class));
         }
 
         return $this->endpoints[$class][$method];
