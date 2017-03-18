@@ -1,3 +1,6 @@
+imports:
+    - { resource: request_options.yml }
+
 services:
     cos_rest_client.endpoint_loader:
         class: Cos\RestClientBundle\Endpoint\EndpointLoader
@@ -14,6 +17,7 @@ services:
 
     cos_rest_client.request_builder:
         class: Cos\RestClientBundle\Request\RequestBuilder
+        arguments: ["@cos_rest_client.request_options"]
         public: false
 
     cos_rest_client.request_executor:

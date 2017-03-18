@@ -4,6 +4,7 @@ namespace Cos\RestClientBundle\Endpoint;
 
 
 use Cos\RestClientBundle\Annotation\Client;
+use Cos\RestClientBundle\Exception\InvalidConfigurationException;
 use Doctrine\Common\Annotations\Reader;
 
 class EndpointLoader
@@ -24,6 +25,9 @@ class EndpointLoader
 
     public function load($class)
     {
+        if ($this->endpointCollection->has($class)) {
+            return;
+        }
         $refectionClass = new \ReflectionClass($class);
         $methods = $refectionClass->getMethods();
         $baseUri = $this->getBaseUri($refectionClass);
@@ -46,13 +50,13 @@ class EndpointLoader
                 return $this->getClientBaseUri($annotation->name);
             }
         }
-        throw new \RuntimeException("No client was specified for {$class->getName()}");
+        throw new InvalidConfigurationException("No client was specified for {$class->getName()}");
     }
 
     private function getClientBaseUri($clientName)
     {
         if (!isset($this->clients[$clientName])) {
-            throw new \InvalidArgumentException("No client with name {$clientName} was configured");
+            throw new InvalidConfigurationException("No client with name {$clientName} was configured");
         }
 
         return $this->clients[$clientName]['baseUri'];

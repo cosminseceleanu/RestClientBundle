@@ -26,4 +26,9 @@ class EndpointCollection
 
         return $this->endpoints[$class][$method];
     }
+
+    public function has($class)
+    {
+        return isset($this->endpoints[$class]);
+    }
 }

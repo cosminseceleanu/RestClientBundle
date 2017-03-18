@@ -1,0 +1,33 @@
+services:
+    cos_rest_client.request_options.json:
+        class: Cos\RestClientBundle\Request\Options\JsonOption
+        public: false
+        tags: [{name: cos_rest.request_option}]
+
+    cos_rest_client.request_options.request_body:
+        class: Cos\RestClientBundle\Request\Options\RequestBodyOption
+        public: false
+        tags: [{name: cos_rest.request_option}]
+
+    cos_rest_client.request_options.query:
+        class: Cos\RestClientBundle\Request\Options\QueryOption
+        public: false
+        tags: [{name: cos_rest.request_option}]
+
+    cos_rest_client.request_options.query_map:
+        class: Cos\RestClientBundle\Request\Options\QueryMapOption
+        public: false
+        tags: [{name: cos_rest.request_option}]
+
+    cos_rest_client.request_options.multipart:
+        class: Cos\RestClientBundle\Request\Options\MultipartOption
+        public: false
+        tags: [{name: cos_rest.request_option}]
+
+    cos_rest_client.request_options.form:
+        class: Cos\RestClientBundle\Request\Options\FormOption
+        public: false
+        tags: [{name: cos_rest.request_option}]
+
+    cos_rest_client.request_options:
+        class: Cos\RestClientBundle\Request\Options\RequestOptionsCollection

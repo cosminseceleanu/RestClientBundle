@@ -3,30 +3,22 @@
 namespace Cos\RestClientBundle\Endpoint;
 
 
+use Cos\RestClientBundle\Annotation\Path;
+use Cos\RestClientBundle\Exception\InvalidConfigurationException;
+
 class Endpoint
 {
-    private $paths = array();
-
     private $uri;
 
     private $httpMethod;
 
-    private $queryParams;
+    private $annotations;
 
-    private $requestBody;
-
-    private $queryMap;
-
-    private $json;
-
-    private $multipart;
-
-    private $form;
-
-    public function __construct($uri, $method = 'get')
+    public function __construct($uri, $method = 'get', array $annotations = array())
     {
         $this->uri = $uri;
         $this->httpMethod = $method;
+        $this->annotations = $annotations;
     }
 
     public function getUri()
@@ -34,14 +26,9 @@ class Endpoint
         return $this->uri;
     }
 
-    public function getQueryMap()
+    public function getAnnotations()
     {
-        return $this->queryMap;
-    }
-
-    public function getPath($name)
-    {
-        return $this->paths[$name];
+        return $this->annotations;
     }
 
     public function getHttpMethod()
@@ -49,63 +36,14 @@ class Endpoint
         return $this->httpMethod;
     }
 
-    public function getQueryParams()
+    public function getPath($name)
     {
-        return $this->queryParams;
-    }
+        foreach ($this->annotations as $annotation) {
+            if ($annotation instanceof Path && $annotation->name === $name) {
+                return $annotation;
+            }
+        }
 
-    public function getRequestBody()
-    {
-        return $this->requestBody;
-    }
-
-    public function setQueryMap($queryMap)
-    {
-        $this->queryMap = $queryMap;
-    }
-
-    public function addPath($path, $paramName)
-    {
-        $this->paths[$path] = $paramName;
-    }
-
-    public function addQueryParam($queryParam)
-    {
-        $this->queryParams[] = $queryParam;
-    }
-
-    public function setRequestBody($requestBody)
-    {
-        $this->requestBody = $requestBody;
-    }
-
-    public function setForm($form)
-    {
-        $this->form = $form;
-    }
-
-    public function getForm()
-    {
-        return $this->form;
-    }
-
-    public function getJson()
-    {
-        return $this->json;
-    }
-
-    public function setJson($json)
-    {
-        $this->json = $json;
-    }
-
-    public function getMultipart()
-    {
-        return $this->multipart;
-    }
-
-    public function setMultipart($multipart)
-    {
-        $this->multipart = $multipart;
+        throw new InvalidConfigurationException("No @Path annotation was set for name {$name}");
     }
 }
